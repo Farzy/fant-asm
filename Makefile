@@ -1,20 +1,18 @@
 # Makefile
 
-BIN=hello_macos
+bins := $(patsubst %.asm,%,$(wildcard *_macos.asm))
 
 LDOPTS=-macosx_version_min 10.7.0
 
-#hello_macos: hello_macos.o
-#	ld $(LDOPTS) -o hello_macos hello_macos.o
+.PHONY : all clean
 
-%: %.o
+all: $(bins)
+
+%_macos: %_macos.o
 	ld $(LDOPTS) -o $@ $<
 
-%.o: %.asm
+%_macos.o: %_macos.asm
 	nasm -fmacho64 $<
 
-all: $(BIN)
-
-.PHONY : clean
 clean:
-	rm -f *.o $(BIN)
+	rm -f *.o $(bins)
