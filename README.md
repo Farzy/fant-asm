@@ -2,6 +2,20 @@
 
 Learning x86 assembly and making stupid puns.
 
+# Usage
+
+## Compiling
+
+```shell
+make all
+```
+
+## Cleaning
+
+```shell
+make clean
+```
+
 # Licence
 
 Copyright 2020 Farzad FARID <farzy@farzy.org>
