@@ -6,6 +6,7 @@
 ; ----------------------------------------------------------------------------------------
 
           global    start
+          default   rel
 
           section   .text
 start:    mov       rax, 0x02000004         ; system call for write

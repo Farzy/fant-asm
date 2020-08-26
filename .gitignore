@@ -121,3 +121,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# ASM
+*.o
+hello_macos
