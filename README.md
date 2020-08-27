@@ -20,8 +20,8 @@ make clean
 
 ## 32 bits vs 64 bits
 
-Most of the ASM example I found so far were written for 32 bits systems. I replaced the registers with
-the 64 bits versions and it works so far…
+Most of the ASM samples I found so far were written for 32 bits systems. I replaced the registers with
+the 64 bits versions and it worked so far…
 For example `eax` becomes `rax`.
 
 Be careful not to clobber memory by using a too big register when a 16 or 32 bits write is enough!
@@ -35,9 +35,9 @@ Be careful not to clobber memory by using a too big register when a 16 or 32 bit
 
 ## macOS version
 
-Linking on macOS version 10.7 needs the entry point to be named `start` and no dynamic library linking.
+Linking for **macOS min version 10.7** needs the entry point to be named `start` and no dynamic library linking.
 
-In order to compile & link for macOS >= 10.12 you need to:
+In order to compile & link for **macOS min version 10.12** you need to:
 * Remplace the symbol `start` with `_main`
 * Link to the `System` dynamic library with `-lSystem`
 
