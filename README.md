@@ -2,6 +2,9 @@
 
 Learning x86 assembly and making stupid puns.
 
+*Note*: Some texts have been copied from other sites, full references are provided at the
+end of this document.
+
 # Usage
 
 ## Compiling
@@ -32,8 +35,7 @@ Be careful not to clobber memory by using a too big register when a 16 or 32 bit
 * The system call numbers are different!
 * For `write` and `exit` at least, the arguments are passed in the same registers
 
-
-## macOS version
+## macOS version for the linker
 
 Linking for **macOS min version 10.7** needs the entry point to be named `start` and no dynamic library linking.
 
@@ -41,6 +43,28 @@ In order to compile & link for **macOS min version 10.12** you need to:
 * Remplace the symbol `start` with `_main`
 * Link to the `System` dynamic library with `-lSystem`
 
+## Finding the XNU version corresponding to an OS X version
+
+* Go to https://opensource.apple.com/
+* Find your OS X version
+* Find the `xnu` directory and note the version
+
+For example, for **[macOS 10.15.6](https://opensource.apple.com/release/macos-10156.html)** 
+we have **[xnu-6153.141.1](https://opensource.apple.com/source/xnu/xnu-6153.141.1/)**.
+
+## Finding system call tables
+
+* Find the XNU version
+* Navigate to the **xnu** source code
+* Find the file `bsd/kern/syscalls.master`
+
+For example: https://opensource.apple.com/source/xnu/xnu-6153.141.1/bsd/kern/syscalls.master
+
+## System calls on X86-64
+
+* Arguments are passed on the registers `rdi`, `rsi`, `rdx`, `r10`, `r8` and `r9`
+* Syscall number is in the `rax` register
+* The call is done via the `syscall` instruction
 
 # Licence
 
@@ -60,6 +84,9 @@ limitations under the License.
    
 # References
 
-* NASM tutorial: https://cs.lmu.edu/~ray/notes/nasmtutorial/
-* ‘Hello World’ Assembly Program on macOS Mojave: https://medium.com/@thisura1998/hello-world-assembly-program-on-macos-mojave-d5d65f0ce7c6
-
+* [NASM tutorial](https://cs.lmu.edu/~ray/notes/nasmtutorial/)
+* [‘Hello World’ Assembly Program on macOS Mojave](https://medium.com/@thisura1998/hello-world-assembly-program-on-macos-mojave-d5d65f0ce7c6)
+* [Making system calls from Assembly in Mac OS X](https://filippo.io/making-system-calls-from-assembly-in-mac-os-x/)
+* System call conventions on macOS:
+  * https://stackoverflow.com/questions/11179400/basic-assembly-not-working-on-mac-x86-64lion
+  * https://stackoverflow.com/questions/48845697/macos-64-bit-system-call-table
