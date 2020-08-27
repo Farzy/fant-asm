@@ -33,7 +33,11 @@ Be careful not to clobber memory by using a too big register when a 16 or 32 bit
 ## Linux vs macOS
 
 * The system call numbers are different!
-* For `write` and `exit` at least, the arguments are passed in the same registers
+* For `write` and `exit` at least, the same arguments are passed in the same registers
+
+The reason why they use the same register is because both OS on 64 bits architectures
+adopted the [System V AMD64 ABI reference](https://gitlab.com/x86-psABIs/x86-64-ABI)
+calling convention.
 
 ## macOS version for the linker
 
@@ -125,3 +129,4 @@ limitations under the License.
   * https://stackoverflow.com/questions/11179400/basic-assembly-not-working-on-mac-x86-64lion
   * https://stackoverflow.com/questions/48845697/macos-64-bit-system-call-table
 * [32-bit absolute addresses no longer allowed in x86-64 Linux?](https://stackoverflow.com/questions/43367427/32-bit-absolute-addresses-no-longer-allowed-in-x86-64-linux)
+* [System V AMD64 ABI reference](https://gitlab.com/x86-psABIs/x86-64-ABI)
