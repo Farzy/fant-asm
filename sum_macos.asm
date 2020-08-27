@@ -14,6 +14,7 @@ start:
     add     ax, bx
     add     ax, '0'
 
+; XXX Get rid of this line
     mov     ah, 10      ; newline
     mov     [sum], ax
 
