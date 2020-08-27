@@ -2,41 +2,44 @@
 
 section .text
 
-global _start
+global start
           default   rel
 
-_start:
+start:
 
-    mov     eax, [x]
-    sub     eax, '0'
-    mov     ebx, [y]
-    sub     ebx, '0'
-    add     eax, ebx
-    add     eax, '0'
+    mov     ax, [x]
+    sub     ax, '0'
+    mov     bx, [y]
+    sub     bx, '0'
+    add     ax, bx
+    add     ax, '0'
 
-    mov     [sum], eax
+    mov     ah, 10      ; newline
+    mov     [sum], ax
 
-    mov     ecx, msg
-    mov     edx, len
-    mov     ebx, 1
-    mov     eax, 4
-    int     0x80
+    mov     rsi, msg
+    mov     rdx, len
+    mov     rdi, 1
+    mov     rax, 0x02000004
+    syscall
 
-    mov     ecx, sum
-    mov     edx, 1
-    mov     ebx, 1
-    mov     eax, 4
-    int     0x80
+    mov     rsi, sum
+    mov     rdx, 2
+    mov     rdi, 1
+    mov     rax, 0x02000004
+    syscall
 
-    mov     eax, 1
-    int     0x80
+    mov     rax, 0x02000001
+    xor     rdi, rdi
+    syscall
 
 section .data
-    x db '5'
-    y db '3'
-    msg db  "sum of x and y is "
+    x: db '5'
+    y: db '3'
+    msg: db  "sum of x and y is "
     len equ $ - msg
 
 segment .bss
 
-    sum resb 1
+    sum: resb 1
+    nl:  db 10
