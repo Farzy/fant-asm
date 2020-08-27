@@ -1,11 +1,11 @@
 ; Example from https://www.jdoodle.com/compile-assembler-nasm-online/
 
+    global  _main
+    default rel
+
 section .text
 
-global start
-          default   rel
-
-start:
+_main:
 
     mov     ax, [x]
     sub     ax, '0'
@@ -14,7 +14,6 @@ start:
     add     ax, bx
     add     ax, '0'
 
-; XXX Get rid of this line
     mov     ah, 10      ; newline
     mov     [sum], ax
 
@@ -42,5 +41,4 @@ section .data
 
 segment .bss
 
-    sum: resb 1
-    nl:  db 10
+    sum: resb 2

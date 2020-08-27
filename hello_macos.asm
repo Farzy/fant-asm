@@ -5,11 +5,11 @@
 ;     nasm -fmacho64 hello.asm && ld hello.o && ./a.out
 ; ----------------------------------------------------------------------------------------
 
-          global    start
+          global    _main
           default   rel
 
           section   .text
-start:    mov       rax, 0x02000004         ; system call for write
+_main:    mov       rax, 0x02000004         ; system call for write
           mov       rdi, 1                  ; file handle 1 is stdout
           mov       rsi, message            ; address of string to output
           mov       rdx, message.len                 ; number of bytes

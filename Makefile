@@ -2,7 +2,7 @@
 
 bins := $(patsubst %.asm,bin/%,$(wildcard *_macos.asm))
 
-LDOPTS=-macosx_version_min 10.7.0
+LDOPTS=-macosx_version_min 10.12 -lSystem
 
 .PHONY : all clean
 
