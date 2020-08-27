@@ -1,6 +1,6 @@
 # Makefile
 
-bins := $(patsubst %.asm,%,$(wildcard *_macos.asm))
+bins := $(patsubst %.asm,bin/%,$(wildcard *_macos.asm))
 
 LDOPTS=-macosx_version_min 10.7.0
 
@@ -8,7 +8,7 @@ LDOPTS=-macosx_version_min 10.7.0
 
 all: $(bins)
 
-%_macos: %_macos.o
+bin/%_macos: %_macos.o
 	ld $(LDOPTS) -o $@ $<
 
 %_macos.o: %_macos.asm

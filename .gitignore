@@ -123,4 +123,5 @@ Temporary Items
 
 # ASM
 *.o
-hello_macos
+bin/*
+!bin/.keep
