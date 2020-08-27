@@ -17,13 +17,13 @@ _main:
     mov     ah, 10      ; newline
     mov     [sum], ax
 
-    mov     rsi, msg
+    lea     rsi, [msg]
     mov     rdx, len
     mov     rdi, 1
     mov     rax, 0x02000004
     syscall
 
-    mov     rsi, sum
+    lea     rsi, [sum]
     mov     rdx, 2
     mov     rdi, 1
     mov     rax, 0x02000004

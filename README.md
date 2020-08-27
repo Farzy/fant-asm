@@ -66,6 +66,40 @@ For example: https://opensource.apple.com/source/xnu/xnu-6153.141.1/bsd/kern/sys
 * Syscall number is in the `rax` register
 * The call is done via the `syscall` instruction
 
+## Relative versus absolute addressing
+
+Most sample codes that I found use absolute memory addressing, apparently because it's how
+it works on 32 bits systems.
+
+64 bits macOS uses relative memory addressing by default in order to activate
+ **[PIC ("position-independent code")](https://en.wikipedia.org/wiki/Position-independent_code)**, also
+called **PIE** ("position-independent executable"). 
+
+If the compiled `.o` file contains absolute adresssing, `ld` complains with the following
+message but compiles anyway:
+
+> ld: warning: PIE disabled. Absolute addressing (perhaps -mdynamic-no-pic) not allowed in code signed PIE, but used in _main 
+> from hello_macos.o. To fix this warning, don't compile with -mdynamic-no-pic or link with -Wl,-no_pie
+
+In order to convert to PIE style addressing, add this line at the top of the source code:
+
+```nasm
+        default   rel
+```
+
+Then convert these calls:
+
+```nasm
+        mov       rsi, message            ; address of string to output
+```
+
+to:
+
+```nasm
+        lea       rsi, [message]      ; address of string to output
+```
+
+
 # Licence
 
 Copyright 2020 Farzad FARID <farzy@farzy.org>
@@ -90,3 +124,4 @@ limitations under the License.
 * System call conventions on macOS:
   * https://stackoverflow.com/questions/11179400/basic-assembly-not-working-on-mac-x86-64lion
   * https://stackoverflow.com/questions/48845697/macos-64-bit-system-call-table
+* [32-bit absolute addresses no longer allowed in x86-64 Linux?](https://stackoverflow.com/questions/43367427/32-bit-absolute-addresses-no-longer-allowed-in-x86-64-linux)
