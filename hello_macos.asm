@@ -14,7 +14,7 @@ _main:    mov       rax, 0x02000004         ; system call for write
 ; Old style absolute addressing
 ;          mov       rsi, message            ; address of string to output
 ; New style relative addressing          
-          lea       rsi, [message]      ; address of string to output
+          lea       rsi, [message]          ; address of string to output
           mov       rdx, message.len        ; number of bytes
           syscall                           ; invoke operating system to do the write
           mov       rax, 0x02000001         ; system call for exit
