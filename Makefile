@@ -8,6 +8,10 @@ LDOPTS=-macosx_version_min 10.12 -lSystem
 
 all: $(bins)
 
+# Run an arbitrary binary by stripping "run_" from the target
+run_%: all
+	./bin/$(subst run_,,$@)
+
 bin/%_macos: %_macos.o
 	ld $(LDOPTS) -o $@ $<
 
