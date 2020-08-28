@@ -18,11 +18,17 @@ _main:    mov       rax, 0x02000004         ; system call for write
           mov       rdx, message.len        ; number of bytes
           syscall                           ; invoke operating system to do the write
 
+          mov       rsp, 0
+loop1:
           mov       rax, 0x02000004         ; system call for write
           mov       rdi, 1                  ; file handle 1 is stdout
           lea       rsi, [var1]          ; address of string to output
           mov       rdx, var1Len        ; number of bytes
           syscall                           ; invoke operating system to do the write
+
+          inc       rsp
+          cmp       rsp, 5
+          jl       loop1
 
           mov       rax, 0x02000004         ; system call for write
           mov       rdi, 1                  ; file handle 1 is stdout
