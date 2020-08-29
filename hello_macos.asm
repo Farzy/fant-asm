@@ -10,6 +10,14 @@
 
 %assign   LOOP_COUNT 5
 
+%macro    Write 2
+          mov       rax, 0x02000004         ; system call for write
+          mov       rdi, 1                  ; file handle 1 is stdout
+          lea       rsi, [%1]               ; address of string to output
+          mov       rdx, %2                 ; number of bytes
+          syscall                           ; invoke operating system to do the write
+%endmacro
+
           section   .text
 _main:    mov       rax, 0x02000004         ; system call for write
           mov       rdi, 1                  ; file handle 1 is stdout
@@ -27,11 +35,7 @@ loop1:
           cmp       rbx, LOOP_COUNT
           jl       loop1
 
-          mov       rax, 0x02000004         ; system call for write
-          mov       rdi, 1                  ; file handle 1 is stdout
-          lea       rsi, [var2]             ; address of string to output
-          mov       rdx, var2Len            ; number of bytes
-          syscall                           ; invoke operating system to do the write
+          Write     var2, var2Len
 
 ; Play with LOOP
           mov       ecx, LOOP_COUNT
@@ -42,11 +46,7 @@ loop2:
           mov       [digit+1], byte 10
 
           push      rcx                     ; The syscall clobbers RCX
-          mov       rax, 0x02000004         ; system call for write
-          mov       rdi, 1                  ; file handle 1 is stdout
-          lea       rsi, [digit]            ; address of string to output
-          mov       rdx, 2                  ; number of bytes
-          syscall                           ; invoke operating system to do the write
+          Write digit, 2
           pop       rcx
 
           loop loop2
