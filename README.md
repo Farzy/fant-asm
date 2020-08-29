@@ -130,3 +130,4 @@ limitations under the License.
   * https://stackoverflow.com/questions/48845697/macos-64-bit-system-call-table
 * [32-bit absolute addresses no longer allowed in x86-64 Linux?](https://stackoverflow.com/questions/43367427/32-bit-absolute-addresses-no-longer-allowed-in-x86-64-linux)
 * [System V AMD64 ABI reference](https://gitlab.com/x86-psABIs/x86-64-ABI)
+* [Intel® 64 and IA-32 Architectures Software Developer’s Manual Combined Volumes: 1, 2A, 2B, 2C, 2D, 3A, 3B, 3C, 3D, and 4](https://software.intel.com/content/www/us/en/develop/download/intel-64-and-ia-32-architectures-sdm-combined-volumes-1-2a-2b-2c-2d-3a-3b-3c-3d-and-4.html): 5038 pages! Updated in October 2019.
