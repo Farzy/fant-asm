@@ -33,6 +33,24 @@ loop1:
           mov       rdx, var2Len            ; number of bytes
           syscall                           ; invoke operating system to do the write
 
+; Play with LOOP
+          mov       ecx, LOOP_COUNT
+loop2:
+          mov       eax, ecx
+          add       eax, '0'
+          mov       [digit], al
+          mov       [digit+1], byte 10
+
+          push      rcx                     ; The syscall clobbers RCX
+          mov       rax, 0x02000004         ; system call for write
+          mov       rdi, 1                  ; file handle 1 is stdout
+          lea       rsi, [digit]            ; address of string to output
+          mov       rdx, 2                  ; number of bytes
+          syscall                           ; invoke operating system to do the write
+          pop       rcx
+
+          loop loop2
+
           mov       rax, 0x02000001         ; system call for exit
           xor       rdi, rdi                ; exit code 0
           syscall                           ; invoke operating system to exit
@@ -57,3 +75,7 @@ var1Len     equ     $ - var1
 var2:       TIMES 5 db      "987€ "
             db      10
 var2Len     equ     $ - var2
+
+            section .bss
+
+digit       resb 2      ; a digit and a newline
