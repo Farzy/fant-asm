@@ -132,9 +132,10 @@ limitations under the License.
   * https://stackoverflow.com/questions/48845697/macos-64-bit-system-call-table
 * [32-bit absolute addresses no longer allowed in x86-64 Linux?](https://stackoverflow.com/questions/43367427/32-bit-absolute-addresses-no-longer-allowed-in-x86-64-linux)
 
-## Full course
+## Full courses
 
 * [x86-64 Assembly Language Programming with Ubuntu](http://www.egr.unlv.edu/~ed/assembly64.pdf)
+* [Assembly Language Tutorials and Courses on Hackr.io](https://hackr.io/tutorials/learn-assembly-language)
 
 ## Reference manuals
 
