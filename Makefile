@@ -16,11 +16,11 @@ bin/%_macos: %_macos.o
 	ld $(LDOPTS) -o $@ $<
 
 %_macos.o: %_macos.asm
-	nasm -fmacho64 $<
+	nasm -fmacho64 $< -l $(subst .asm,.lst,$<)
 
 helper: FORCE
 	cargo build --release
 	cp target/release/helper bin
 
 clean:
-	rm -f *.o $(bins) bin/helper
+	rm -f *.o *.lst $(bins) bin/helper

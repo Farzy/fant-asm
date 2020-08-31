@@ -137,5 +137,6 @@ target/
 
 # ASM
 *.o
+*.lst
 bin/*
 !bin/.keep
