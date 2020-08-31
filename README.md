@@ -19,6 +19,39 @@ make all
 make clean
 ```
 
+## Helper tool
+
+There is a helper tool written in **Rust** in the `helper` directory.
+
+In order to build it, install a Rust toolchain and run `make helper`.
+
+Sample usage:
+
+```shell
+bin/helper help
+Fant-asm helper 1.0
+Farzad FARID <farzy@farzy.org>
+Helper functions for learning assembly
+
+USAGE:
+    helper [SUBCOMMAND]
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+SUBCOMMANDS:
+    help       Prints this message or the help of the given subcommand(s)
+    ieee754    Floating point conversion
+```
+
+```shell
+bin/helper ieee754 0xC1440000
+C1440000 = 11000001010001000000000000000000
+Sign: 1, exponent: 3, fraction = 0b1.10001000000000000000000
+```
+
+
 # Learnings
 
 ## 32 bits vs 64 bits
