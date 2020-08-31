@@ -33,5 +33,8 @@ fn main() {
             }
         };
         ieee754::main(hex);
+    } else {
+        eprintln!("{}", matches.usage());
+        std::process::exit(2);
     }
 }

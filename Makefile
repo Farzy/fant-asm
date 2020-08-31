@@ -4,7 +4,7 @@ bins := $(patsubst %.asm,bin/%,$(wildcard *_macos.asm))
 
 LDOPTS=-macosx_version_min 10.12 -lSystem
 
-.PHONY : all clean helper
+.PHONY : all clean FORCE
 
 all: $(bins)
 
@@ -18,9 +18,7 @@ bin/%_macos: %_macos.o
 %_macos.o: %_macos.asm
 	nasm -fmacho64 $<
 
-helper: bin/helper
-
-bin/helper:
+helper: FORCE
 	cargo build --release
 	cp target/release/helper bin
 
