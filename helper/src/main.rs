@@ -1,12 +1,13 @@
 #[macro_use]
 extern crate clap;
-use clap::{App, Arg, SubCommand};
+use clap::{App, Arg, Shell, SubCommand};
+use std::io;
 
 mod ieee754;
 mod unicode;
 
-fn main() {
-    let matches = App::new("Fant-asm helper")
+fn build_cli() -> App<'static, 'static> {
+    App::new("Fant-asm helper")
         .about("Helper functions for learning assembly")
         .version(crate_version!())
         .author(crate_authors!())
@@ -21,7 +22,26 @@ fn main() {
                 ),
         )
         .subcommand(SubCommand::with_name("unicode").about("Play with Unicode / UTF-8"))
-        .get_matches();
+        .subcommand(
+            SubCommand::with_name("generate-bash-completions").about("Output Bash completion"),
+        )
+        .subcommand(
+            SubCommand::with_name("generate-zsh-completions").about("Output Zsh completion"),
+        )
+}
+
+fn main() {
+    let matches = build_cli().get_matches();
+
+    if matches.is_present("generate-bash-completions") {
+        build_cli().gen_completions_to(crate_name!(), Shell::Bash, &mut io::stdout());
+        std::process::exit(0);
+    }
+
+    if matches.is_present("generate-zsh-completions") {
+        build_cli().gen_completions_to(crate_name!(), Shell::Zsh, &mut io::stdout());
+        std::process::exit(0);
+    }
 
     if let Some(matches) = matches.subcommand_matches("ieee754") {
         // println!("Using HEX: {}", matches.value_of("HEX").unwrap());
