@@ -1,3 +1,5 @@
+#[macro_use]
+extern crate clap;
 use clap::{App, Arg, SubCommand};
 
 mod ieee754;
@@ -6,8 +8,8 @@ mod unicode;
 fn main() {
     let matches = App::new("Fant-asm helper")
         .about("Helper functions for learning assembly")
-        .version("1.0")
-        .author("Farzad FARID <farzy@farzy.org>")
+        .version(crate_version!())
+        .author(crate_authors!())
         .subcommand(
             SubCommand::with_name("ieee754")
                 .about("Floating point conversion")
@@ -18,10 +20,7 @@ fn main() {
                         .index(1),
                 ),
         )
-        .subcommand(
-            SubCommand::with_name("unicode")
-                .about("Play with Unicode / UTF-8")
-        )
+        .subcommand(SubCommand::with_name("unicode").about("Play with Unicode / UTF-8"))
         .get_matches();
 
     if let Some(matches) = matches.subcommand_matches("ieee754") {
@@ -40,7 +39,7 @@ fn main() {
         ieee754::main(hex);
     } else if matches.subcommand_matches("unicode").is_some() {
         unicode::main();
-    }        else {
+    } else {
         eprintln!("{}", matches.usage());
         std::process::exit(2);
     }
