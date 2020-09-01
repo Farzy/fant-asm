@@ -1,6 +1,7 @@
 use clap::{App, Arg, SubCommand};
 
 mod ieee754;
+mod unicode;
 
 fn main() {
     let matches = App::new("Fant-asm helper")
@@ -16,6 +17,10 @@ fn main() {
                         .required(true)
                         .index(1),
                 ),
+        )
+        .subcommand(
+            SubCommand::with_name("unicode")
+                .about("Play with Unicode / UTF-8")
         )
         .get_matches();
 
@@ -33,7 +38,9 @@ fn main() {
             }
         };
         ieee754::main(hex);
-    } else {
+    } else if matches.subcommand_matches("unicode").is_some() {
+        unicode::main();
+    }        else {
         eprintln!("{}", matches.usage());
         std::process::exit(2);
     }
